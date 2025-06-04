@@ -22,7 +22,7 @@ jobs:
           cp -r . /tmp/workspace/
           cd /tmp/workspace
     - name: Start server
-      run: make up &
+      run: make up
     - name: Wait for service startup
       run: |
         until curl -s http://localhost:8000; do
