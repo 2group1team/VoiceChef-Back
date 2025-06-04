@@ -11,7 +11,7 @@ jobs:
     - name: Copy .env.example to .env
       run: cp .env.example .env
     - name: Start server
-      run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up &
+      run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d
     - name: Wait for service startup
       run: |
         until curl -s http://localhost:8000; do
