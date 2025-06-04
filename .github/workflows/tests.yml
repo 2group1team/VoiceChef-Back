@@ -10,15 +10,17 @@ jobs:
     - uses: actions/checkout@v4
     - name: Copy .env.example to .env
       run: cp .env.example .env
-    - name: List all files recursively
-      run: ls -R
-    - name: Create folders
+    #- name: Create folders
+    #  run: |
+    #      mkdir -p cache/tts
+    #      mkdir -p uploads/photos
+    #      mkdir -p media/recipes
+    #      mkdir -p htmlcov
+    - name: Copy files to tmp
       run: |
-          mkdir -p cache/tts
-          mkdir -p uploads/photos
-          mkdir -p media/recipes
-          mkdir -p htmlcov
-          chmod -R 777 htmlcov
+          mkdir -p /tmp/workspace
+          cp -r . /tmp/workspace/
+          cd /tmp/workspace
     - name: Start server
       run: make up &
     - name: Wait for service startup
@@ -27,13 +29,8 @@ jobs:
           echo "Waiting for service startup..."
           sleep 5
         done
-    - name: WHY
-      run: docker compose exec app ls -l -R
     - name: Run tests
       run: docker compose exec app make test-cov
-    - name: List all files recursively
-      if: always()
-      run: ls -R
     - name: Upload tests report
       if: always()
       uses: actions/upload-artifact@v4
