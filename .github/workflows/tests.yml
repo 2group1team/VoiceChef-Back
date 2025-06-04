@@ -27,16 +27,23 @@ jobs:
       run: |
         until curl -s http://localhost:8000; do
           echo "Waiting for service startup..."
-          sleep 5
+          sleep 2
         done
     - name: Run tests
-      run: make test-cov
+      run: pytest --tb=short --disable-warnings -c pytest.ini --html=tests-report.html --self-contained-html --cov=app --cov-report=term --cov-report=html
+    - name: Upload coverage report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: htmlcov/
+        retention-days: 7
     - name: Upload tests report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: tests-report
-        path: htmlcov/
+        path: tests-result.html
         retention-days: 7
     - name: Stop server
       if: always()
