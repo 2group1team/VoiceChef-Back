@@ -1,0 +1,42 @@
+name: Run Tests
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Copy .env.example to .env
+      run: cp .env.example .env
+    - name: Set up Python
+      uses: actions/setup-python@v5.6.0
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      uses: py-actions/py-dependency-install@v4
+    - name: Start server
+      run: make run &
+    - name: Wait for service startup
+      run: |
+        until curl -s http://localhost:8000; do
+          echo "Waiting for service startup..."
+          sleep 2
+        done
+    - name: Run tests
+      run: pytest --tb=short --disable-warnings -c pytest.ini --html=tests-report.html --self-contained-html --cov=app --cov-report=term --cov-report=html
+    - name: Upload coverage report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: htmlcov/
+        retention-days: 7
+    - name: Upload tests report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: tests-report
+        path: tests-report.html
+        retention-days: 7
