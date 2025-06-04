@@ -45,6 +45,3 @@ jobs:
         name: tests-report
         path: tests-report.html
         retention-days: 7
-    - name: Stop server
-      if: always()
-      run: make down
