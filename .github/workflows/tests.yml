@@ -10,11 +10,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Copy .env.example to .env
       run: cp .env.example .env
-    - name: Copy files to tmp
-      run: |
-          mkdir -p /tmp/workspace
-          cp -r . /tmp/workspace/
-          cd /tmp/workspace
     - name: Set up Python
       uses: actions/setup-python@v5.6.0
       with:
