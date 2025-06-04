@@ -14,6 +14,7 @@ jobs:
       run: |
           mkdir -p cache/tts
           mkdir -p uploads/photos
+          mkdir -p media/recipes
     - name: Start server
       run: make up
     - name: Run tests
