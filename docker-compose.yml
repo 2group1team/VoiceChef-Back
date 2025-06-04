@@ -35,6 +35,7 @@ services:
 
  # Основное приложение
   app:
+    user: root
     build:
       context: .
       dockerfile: Dockerfile
