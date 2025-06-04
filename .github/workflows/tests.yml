@@ -24,7 +24,7 @@ jobs:
           sleep 5
         done
     - name: Run tests
-      run: docker-compose exec app make test
+      run: docker compose exec app make test
     - name: Stop server
       if: always()
       run: make down
