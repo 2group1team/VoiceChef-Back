@@ -8,14 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: |
-        mkdir -p /tmp/workspace
-        chmod -R 777 /tmp/workspace
-        cd /tmp/workspace
     - name: Copy .env.example to .env
       run: cp .env.example .env
     - name: Start server
-      run: make up
+      run: make up &
     - name: Wait for service startup
       run: |
         until curl -s http://localhost:8000; do
