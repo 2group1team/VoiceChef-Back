@@ -1,0 +1,113 @@
+
+version: '3.8'
+
+services:
+  # База данных PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: voicechef_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    networks:
+      - voicechef_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    command: >
+      postgres
+      -c log_statement=all
+      -c log_destination=stderr
+      -c log_min_messages=info
+      -c client_encoding=UTF8
+
+ # Основное приложение
+  app:
+    user: root
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: voicechef_app
+    restart: unless-stopped
+    environment:
+      # Database settings
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+      # Database pool settings
+      DB_POOL_SIZE: ${DB_POOL_SIZE}
+      DB_MAX_OVERFLOW: ${DB_MAX_OVERFLOW}
+      DB_POOL_TIMEOUT: ${DB_POOL_TIMEOUT}
+      DB_POOL_RECYCLE: ${DB_POOL_RECYCLE}
+      DB_ECHO_LOG: ${DB_ECHO_LOG}
+      DB_CONNECT_TIMEOUT: ${DB_CONNECT_TIMEOUT}
+      DB_SLOW_QUERY_THRESHOLD: ${DB_SLOW_QUERY_THRESHOLD}
+
+      # JWT settings
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_ALGORITHM: ${JWT_ALGORITHM}
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${JWT_ACCESS_TOKEN_EXPIRE_MINUTES}
+      JWT_REFRESH_TOKEN_EXPIRE_DAYS: ${JWT_REFRESH_TOKEN_EXPIRE_DAYS}
+
+      # App settings
+      APP_PORT: ${APP_PORT}
+      DEBUG: ${DEBUG}
+      ENVIRONMENT: ${ENVIRONMENT}
+
+      # Security settings
+      HASH_ROUNDS: ${HASH_ROUNDS}
+      MIN_PASSWORD_LENGTH: ${MIN_PASSWORD_LENGTH}
+
+      # Frontend settings
+      FRONTEND_URLS: ${FRONTEND_URLS}
+
+      # Encoding
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+      PYTHONIOENCODING: utf-8
+      PYTHONPATH: /app
+    volumes:
+      - .:/app
+      - ./uploads:/app/uploads
+      - ./media:/app/media
+      - ./logs:/app/logs
+      - /app/.venv
+    ports:
+      - "${APP_PORT}:8000"
+    networks:
+      - voicechef_network
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+# Volumes для персистентности данных
+volumes:
+  postgres_data:
+    driver: local
+
+# Сеть для изоляции
+networks:
+  voicechef_network:
+    driver: bridge
