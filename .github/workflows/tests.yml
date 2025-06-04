@@ -17,6 +17,8 @@ jobs:
           mkdir -p cache/tts
           mkdir -p uploads/photos
           mkdir -p media/recipes
+          mkdir -p htmlcov
+          chmod -R 777 htmlcov
     - name: Start server
       run: make up &
     - name: Wait for service startup
