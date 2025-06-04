@@ -12,8 +12,8 @@ jobs:
       run: cp .env.example .env
     - name: Create folders
       run: |
-          mkdir -p app/cache/tts
-          mkdir -p app/uploads/photos
+          mkdir -p cache/tts
+          mkdir -p uploads/photos
     - name: Start server
       run: make up
     - name: Run tests
