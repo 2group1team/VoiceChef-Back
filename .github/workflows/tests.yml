@@ -14,8 +14,6 @@ jobs:
           echo "User ID and groups: $(id)"
     - name: Copy .env.example to .env
       run: cp .env.example .env
-    - name: Use Docker in rootless mode.
-      uses: ScribeMD/rootless-docker@0.2.2
     - name: Start server
       run: make up
     - name: Wait for service startup
