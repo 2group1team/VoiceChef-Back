@@ -38,7 +38,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: "1001:1001"
     container_name: voicechef_app
     restart: unless-stopped
     environment:
