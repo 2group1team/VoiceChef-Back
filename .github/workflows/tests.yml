@@ -17,9 +17,9 @@ jobs:
           mkdir -p media/recipes
     - name: Start server
       run: make up &
-    - name: Wait for containers to be ready
+    - name: Wait for service startup
       run: |
-        until curl -s http://localhost:8000/health; do
+        until curl -s http://localhost:8000; do
           echo "Waiting for service startup..."
           sleep 5
         done
