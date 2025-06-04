@@ -12,12 +12,6 @@ jobs:
       run: cp .env.example .env
     - name: Start server
       run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d
-    - name: Wait for service startup
-      run: |
-        until curl -s http://localhost:8000; do
-          echo "Waiting for service startup..."
-          sleep 5
-        done
     - name: Run tests
       run: docker compose exec app pytest --tb=short --disable-warnings -c pytest.ini --html=tests-report.html --self-contained-html --cov=app --cov-report=term --cov-report=html
     - name: Upload coverage report
