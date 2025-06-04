@@ -25,6 +25,8 @@ jobs:
           echo "Waiting for service startup..."
           sleep 5
         done
+    - name: WHY
+      run: docker compose exec app ls -l -R
     - name: Run tests
       run: docker compose exec app make test-cov
     - name: List all files recursively
