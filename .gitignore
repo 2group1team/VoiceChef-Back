@@ -1,0 +1,448 @@
+
+.env
+.env.local
+.env.production
+.env.staging
+.env.test
+.env.*.local
+*.key
+*.pem
+secrets/
+config/local.*
+
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.so
+
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+*.manifest
+*.spec
+
+pip-log.txt
+pip-delete-this-directory.txt
+
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+test-results/
+test_results/
+reports/
+
+*.mo
+*.pot
+
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+instance/
+.webassets-cache
+
+.scrapy
+
+docs/_build/
+
+.pybuilder/
+target/
+
+.ipynb_checkpoints
+
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+test.db
+test_*.db
+voice_chef.db
+
+# PostgreSQL dumps
+*.sql
+*.sql.gz
+*.sql.bz2
+db_dumps/
+backups/*.sql
+
+database_data/
+postgres_data/
+
+uploads/
+!uploads/.gitkeep
+
+# Медиа файлы
+media/
+!media/.gitkeep
+
+# Фотографии рецептов
+photos/
+images/
+user_images/
+
+audio/
+tts_cache/
+audio_cache/
+*.mp3
+*.wav
+*.ogg
+*.m4a
+
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.mkv
+
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.svg
+*.webp
+*.ico
+
+# Исключения - оставляем примеры и статику
+!static/
+!docs/images/
+!app/static/
+!tests/fixtures/
+!tests/data/
+
+logs/
+!logs/.gitkeep
+*.log
+*.log.*
+*.out
+error.log
+access.log
+debug.log
+
+# Ротированные логи
+*.log.1
+*.log.2
+*.log.gz
+
+# Кэши приложения
+cache/
+!cache/.gitkeep
+tmp/
+temp/
+.tmp/
+.cache/
+
+# Redis dumps
+dump.rdb
+
+# Docker volumes data
+docker_volumes/
+postgres_data/
+redis_data/
+
+# Docker override files
+docker-compose.override.yml
+docker-compose.local.yml
+docker-compose.prod.yml
+docker-compose.dev.local.yml
+
+# Docker build context excludes
+.dockerignore
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+Session.vim
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Atom
+.atom/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Резервные копии
+*.backup
+*.bak
+backup_*/
+db_backup_*/
+migrations_backup/
+
+# Временные файлы разработки
+dev_temp/
+playground/
+scratch/
+experiments/
+
+# Профилирование
+*.prof
+profile_*/
+
+# Локальные скрипты и конфигурации
+scripts/local/
+local_scripts/
+local/
+.local/
+
+# CI/CD артефакты (локальные)
+.github/workflows/*.local.yml
+artifacts/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+
+# Kubernetes
+k8s/secrets/
+*.kubeconfig
+
+# ==========================================
+# ПАКЕТНЫЕ МЕНЕДЖЕРЫ
+# ==========================================
+# npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Bower
+bower_components/
+
+# Prometheus
+prometheus_data/
+
+# Grafana
+grafana_data/
+
+# New Relic
+newrelic.ini
+
+# Datadog
+datadog/
+
+# Тестовые данные
+test_data/
+fixtures/temp/
+
+.benchmarks/
+
+.mutmut-cache
+
+cov_html/
+coverage_reports/
+
+docs/build/
+docs/_build/
+site/
+
+tts_models/
+voice_models/
+speech_data/
+
+exported_recipes/
+recipe_exports/
+
+analytics_data/
+user_analytics/
+
+image_processing_temp/
+
+# Важные файлы конфигурации
+!.env.example
+!.gitkeep
+!requirements.txt
+!Dockerfile
+!docker-compose.yml
+!Makefile
+!pytest.ini
+!alembic.ini
+!README.md
+!LICENSE
+
+# Структурные файлы приложения
+!app/
+!tests/
+!alembic/
+
+# Примеры и шаблоны
+!examples/
+!templates/
+!static/examples/
+
+# Документация
+!docs/
+!*.md
+!CHANGELOG.md
+
+# Конфигурационные файлы
+!pyproject.toml
+!setup.py
+!setup.cfg
+!tox.ini
+
+!.github/
+!.github/workflows/
+!.github/ISSUE_TEMPLATE/
+!.github/PULL_REQUEST_TEMPLATE.md
