@@ -51,10 +51,10 @@ RUN mkdir -p /app/uploads/photos \
 COPY . .
 
 # Устанавливаем права доступа
-#RUN chown -R voicechef:voicechef /app
+RUN chown -R voicechef:voicechef /app
 
 # Переключаемся на непривилегированного пользователя
-#USER voicechef
+USER voicechef
 
 # Порт приложения
 EXPOSE 8000
