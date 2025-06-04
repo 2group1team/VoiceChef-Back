@@ -17,7 +17,6 @@ jobs:
           mkdir -p cache/tts
           mkdir -p uploads/photos
           mkdir -p media/recipes
-          mkdir -p htmlcov
     - name: Start server
       run: make up &
     - name: Wait for service startup
@@ -29,6 +28,7 @@ jobs:
     - name: Run tests
       run: docker compose exec app make test-cov
     - name: List all files recursively
+      if: always()
       run: ls -R
     - name: Upload tests report
       if: always()
